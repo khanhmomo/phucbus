@@ -2,7 +2,7 @@
 
 #Install Apache Tomcat (Any version)
 
-#Install JDK
+#Install JDK 21
 
 #Install MySQL Community (Any version)
 
