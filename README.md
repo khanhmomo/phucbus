@@ -18,5 +18,7 @@ https://www.jetbrains.com/help/idea/creating-and-configuring-web-application-ele
 #MYSQL config
 
 use company;
+
 create table users(id int primary key auto_increment, user_name varchar(50), user_pw varchar(50), user_email varchar(50));
+
 desc users;
