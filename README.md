@@ -10,6 +10,7 @@
 1. Download mysql-connector-8.0.11.jar
 2. Create <lib> folder in main/webapp
 3. Copy mysql-connector-8.0.11.jar to /lib
+4. Copy mysql-connector-8.0.11.jar to <apache tomcat folder>/lib
    
 #Create IntelLij Servlet Template
 
