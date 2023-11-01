@@ -23,3 +23,5 @@ use company;
 create table users(id int primary key auto_increment, user_name varchar(50), user_pw varchar(50), user_email varchar(50));
 
 desc users;
+
+!Remember to change the port and mysql account when using mysql command in java source code!
