@@ -1,0 +1,8 @@
+
+<web-app>
+  <display-name>login</display-name>
+  <welcome-file-list>
+    <filecom-file>index.jsp</filecom-file>
+
+  </welcome-file-list>
+</web-app>
