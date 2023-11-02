@@ -32,27 +32,30 @@ public class SearchServlet extends HttpServlet {
             pst.setInt(1, search_from);
             pst.setInt(2, search_to);
             pst.setString(3,search_seattype.toLowerCase());
+
             ResultSet rs = pst.executeQuery();
 
+            if (rs.first()) {
+                while (!rs.isAfterLast()) {
+                    PreparedStatement pst_from = con.prepareStatement("select * from cities where city_id = ?");
+                    PreparedStatement pst_to = con.prepareStatement("select * from cities where city_id = ?");
 
-            if (rs.next()) {
-                PreparedStatement pst_from = con.prepareStatement("select * from cities where city_id = ?");
-                PreparedStatement pst_to = con.prepareStatement("select * from cities where city_id = ?");
-                pst_from.setInt(1, search_from);
-                pst_to.setInt(1, search_to);
-                ResultSet rs_from = pst_from.executeQuery();
-                ResultSet rs_to = pst_to.executeQuery();
-                if(rs_from.next() && rs_to.next()) {
-                    out.println("FROM: " + rs_from.getString(2));
-                    out.println("TO: " + rs_to.getString(2));
-                    out.println("SEAT TYPE: "+rs.getString(2));
-                    out.println("PRICE: "+rs.getInt(8));
+                    pst_from.setInt(1, search_from);
+                    pst_to.setInt(1, search_to);
+                    ResultSet rs_from = pst_from.executeQuery();
+                    ResultSet rs_to = pst_to.executeQuery();
+                    if (rs_from.next() && rs_to.next()) {
+                        out.println("BUS ID: " + rs.getInt(1));
+                        out.println("FROM: " + rs_from.getString(2));
+                        out.println("TO: " + rs_to.getString(2));
+                        out.println("SEAT TYPE: " + rs.getString(2));
+                        out.println("PRICE: " + rs.getInt(8));
+                    }
+                    out.println("DATE: " + search_date);
+                    out.println("ADULT: " + search_adult);
+                    out.println("CHILD: " + search_child);
+                    rs.relative(1);
                 }
-                out.println("DATE: "+search_date);
-                out.println("ADULT: "+search_adult);
-                out.println("CHILD: "+search_child);
-
-
             } else {
                 out.println("NO ROUTE FOUND");
             }
