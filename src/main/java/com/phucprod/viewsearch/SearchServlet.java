@@ -58,6 +58,7 @@ public class SearchServlet extends HttpServlet {
                 }
             } else {
                 out.println("NO ROUTE FOUND");
+
             }
         } catch (Exception e) {
             e.printStackTrace();
