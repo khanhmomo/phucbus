@@ -60,7 +60,7 @@
 
 						<div class="text-center p-t-90">
 							<a class="txt1" href="register.jsp">
-								Quat do phac man 123
+								Don't have an account? Sign up
 							</a>
 						</div>
 					</form>
