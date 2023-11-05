@@ -1,0 +1,6 @@
+body {
+    visibility: hidden;
+}
+.printMe {
+    visibility: visible;
+}

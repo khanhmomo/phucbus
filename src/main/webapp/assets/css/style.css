@@ -172,3 +172,9 @@
 .booking-form .submit-btn:focus {
 	opacity: 0.9;
 }
+
+.qr-code {
+ 	max-width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}

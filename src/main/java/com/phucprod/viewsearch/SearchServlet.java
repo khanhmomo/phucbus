@@ -67,6 +67,7 @@ public class SearchServlet extends HttpServlet {
                             item.arrive_time = rs_route.getTime(7);
                             list_route.add(item);
                             request.setAttribute("data", list_route);
+                            request.setAttribute("date", rs.getDate(1));
                             dispatcher = request.getRequestDispatcher("search.jsp");
                         }
                         else {

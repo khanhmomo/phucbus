@@ -1,5 +1,6 @@
 package struct;
 
+import java.sql.Date;
 import java.sql.Time;
 
 public class route {

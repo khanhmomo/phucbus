@@ -16,6 +16,8 @@ public class RegistrationServlet extends HttpServlet {
         String user_email = request.getParameter("email");
         String user_pass = request.getParameter("pass");
         String user_repass = request.getParameter("repass");
+        String user_firstname = request.getParameter("firstname");
+        String user_lastname = request.getParameter("lastname");
 
         RequestDispatcher dispatcher = null;
         Connection con = null;
@@ -41,10 +43,12 @@ public class RegistrationServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
             else {
-                PreparedStatement pst = con.prepareStatement("insert into users(user_name, user_pw, user_email) values(?,?,?) ");
+                PreparedStatement pst = con.prepareStatement("insert into users(user_name, user_pw, user_email, user_firstname, user_lastname) values(?,?,?,?,?) ");
                 pst.setString(1, user_name);
                 pst.setString(2, user_pass);
                 pst.setString(3, user_email);
+                pst.setString(4,user_firstname);
+                pst.setString(5,user_lastname);
 
 
                 int rowCount = pst.executeUpdate();

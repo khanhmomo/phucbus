@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>PhucBus</title>
-
+    <link rel="icon" type="image/png" href="assets/images/icons/favicon.ico"/>
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=PT+Sans:400" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -64,35 +64,46 @@
                 <div class="booking-form">
                     <div class="w3-container">
                         <h2 class="w3-text-white">SEARCH RESULT</h2>
+                        <p class="w3-text-white">Date: <%=request.getAttribute("date")%></p>
                         <p class="w3-text-white">Available route(s) base on your search</p>
 
+                        <form method="post" action="booking">
+                            <table class="w3-table w3-white w3-bordered">
+                                <tr>
+                                    <th>Bus ID</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Departing</th>
+                                    <th>Arrival</th>
+                                    <th>Price</th>
+                                </tr>
 
-                        <table class="w3-table w3-white w3-bordered">
-                            <tr>
-                                <th>Bus ID</th>
-                                <th>From</th>
-                                <th>To</th>
-                                <th>Departing</th>
-                                <th>Arrival</th>
-                                <th>Price</th>
-                            </tr>
 
+                                <% List<route> list = (List<route>) request.getAttribute("data");
+                                    for(route item : list) {
+                                        %>
+                                            <tr>
+                                                <td><%=item.bus_id%></td>
+                                                <td><%=item.start_station%></td>
+                                                <td><%=item.end_station%></td>
+                                                <td><%=item.start_time%></td>
+                                                <td><%=item.arrive_time%></td>
+                                                <td><%=item.price%></td>
 
-                            <% List<route> list = (List<route>) request.getAttribute("data");
-                                for(route item : list) {
-                                    %>
-                                        <tr>
-                                            <td><%=item.bus_id%></td>
-                                            <td><%=item.start_station%></td>
-                                            <td><%=item.end_station%></td>
-                                            <td><%=item.start_time%></td>
-                                            <td><%=item.arrive_time%></td>
-                                            <td><%=item.price%></td>
-                                        </tr>
-                                    <%
-                                }%>
-                        </table>
-
+                                                <td>
+                                                    <input type="hidden" name="booking_date" value=<%=request.getAttribute("date")%>>
+                                                    <button
+                                                            class="w3-btn w3-round-xxlarge w3-pink"
+                                                            name="bus_id" type="submit" value=<%=item.bus_id%>
+                                                    >
+                                                        Book
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        <%
+                                    }%>
+                            </table>
+                        </form>
                     </div>
                 </div>
             </div>
