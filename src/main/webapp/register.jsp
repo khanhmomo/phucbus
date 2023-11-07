@@ -28,7 +28,7 @@
     <!--===============================================================================================-->
 </head>
 <body>
-    <input type="hidden" id="status" value="<%= request.getAttribute("status")%>"
+    <input type="hidden" id="status" value="<%= request.getAttribute("status")%>">
     <div class="limiter">
         <div class="container-login100" style="background-image: url('assets/images/bg-01.jpg');">
             <div class="wrap-login100">

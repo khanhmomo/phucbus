@@ -22,8 +22,6 @@ public class SearchServlet extends HttpServlet {
         int search_from = Integer.parseInt(request.getParameter("from"));
         int search_to = Integer.parseInt(request.getParameter("to"));
         String search_date = request.getParameter("date");
-        String search_adult = request.getParameter("adult_cnt");
-        String search_child = request.getParameter("child_cnt");
         String search_seattype = request.getParameter("seat_type");
 
         PrintWriter out = response.getWriter();
@@ -56,7 +54,7 @@ public class SearchServlet extends HttpServlet {
                         ResultSet rs_from = pst_from.executeQuery();
                         ResultSet rs_to = pst_to.executeQuery();
                         ResultSet rs_route = pst_route.executeQuery();
-                        if (rs_from.next() && rs_to.next() && rs_route.next()) {
+                        if (rs_from.next() && rs_to.next() && rs_route.next() && rs.getInt(5) > 0) {
                             route item = new route();
                             item.bus_id = rs.getInt(4);
                             item.price = rs_route.getInt(8);

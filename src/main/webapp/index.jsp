@@ -40,19 +40,7 @@
 
 <div id="booking" class="section">
 
-    <div class="w3-bar w3-pink w3-sans-serif">
-        <a href= "" class="w3-bar-item w3-button w3-mobile">PhucBus</a>
-        <a href="bookinghistory" class="w3-bar-item w3-button w3-mobile">Booking History</a>
-        <a href="about" class="w3-bar-item w3-button w3-mobile">About</a>
-        <div class="w3-dropdown-hover w3-mobile w3-right">
-            <button class="w3-button">Welcome <%=session.getAttribute("name")%>! <i class="fa fa-caret-down"></i></button>
-            <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
-                <a href="#" class="w3-bar-item w3-button w3-mobile">Account Setting</a>
-                <a href="logout" class="w3-bar-item w3-button w3-mobile">Logout</a>
-
-            </div>
-        </div>
-    </div>
+    <%@ include file = "views/header.html" %>
 
 
     <div class="section-center">
@@ -123,28 +111,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <span class="form-label">Adults (18+)</span>
-                                    <select name="adult_cnt" class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select>
-                                    <span class="select-arrow"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <span class="form-label">Children (0-17)</span>
-                                    <select name="child_cnt" class="form-control">
-                                        <option>0</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                    </select>
-                                    <span class="select-arrow"></span>
-                                </div>
-                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <span class="form-label">Seat type</span>
@@ -168,5 +134,6 @@
         </div>
     </div>
 </div>
+<%@ include file = "views/footer.html" %>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <%@ page import="struct.route" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="struct.ticket" %>
 <%
     if(session.getAttribute("name")==null) {
         response.sendRedirect("login.jsp");
@@ -51,47 +52,42 @@
             <div class="row">
                 <div class="booking-form">
                     <div class="w3-container">
-                        <h2 class="w3-text-white">SEARCH RESULT</h2>
-                        <p class="w3-text-white">Date: <%=request.getAttribute("date")%></p>
-                        <p class="w3-text-white">Available route(s) base on your search</p>
-
-                        <form method="post" action="booking">
+                        <h2 class="w3-text-white">BOOKING HISTORY</h2>
+                        <form method="post" action="viewticket">
                             <table class="w3-table w3-white w3-bordered">
                                 <tr>
+                                    <th>Ticket ID</th>
+                                    <th>Date</th>
                                     <th>Bus ID</th>
                                     <th>From</th>
                                     <th>To</th>
-                                    <th>Departing</th>
-                                    <th>Arrival</th>
-                                    <th>Price</th>
                                 </tr>
 
 
-                                <% List<route> list = (List<route>) request.getAttribute("data");
-                                    for(route item : list) {
-                                        %>
-                                            <tr>
-                                                <td><%=item.bus_id%></td>
-                                                <td><%=item.start_station%></td>
-                                                <td><%=item.end_station%></td>
-                                                <td><%=item.start_time%></td>
-                                                <td><%=item.arrive_time%></td>
-                                                <td><%=item.price%></td>
+                                <% List<ticket> list = (List<ticket>) request.getAttribute("data");
+                                    for(ticket item : list) {
+                                %>
+                                <tr>
+                                    <td><%=item.ticket_id%></td>
+                                    <td><%=item.ticket_date%></td>
+                                    <td><%=item.ticket_busID%></td>
+                                    <td><%=item.ticket_from%></td>
+                                    <td><%=item.ticket_to%></td>
+                                    <td>
 
-                                                <td>
-                                                    <input type="hidden" name="booking_date" value=<%=request.getAttribute("date")%>>
-                                                    <button
-                                                            class="w3-btn w3-round-xxlarge w3-pink"
-                                                            name="bus_id" type="submit" value=<%=item.bus_id%>
-                                                    >
-                                                        Book
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        <%
+                                        <button
+                                                class="w3-btn w3-round-xxlarge w3-pink"
+                                                name="ticket_id" type="submit" value=<%=item.ticket_id%>
+                                        >
+                                            View Ticket
+                                        </button>
+                                    </td>
+
+                                </tr>
+                                <%
                                     }%>
                             </table>
-                        </form>
+                        <form>
                     </div>
                 </div>
             </div>

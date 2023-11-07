@@ -44,20 +44,7 @@
 
 <div id="booking" class="section">
 
-    <div class="w3-bar w3-pink w3-sans-serif">
-        <a href= "index.jsp" class="w3-bar-item w3-button w3-mobile">PhucBus</a>
-        <a href="bookinghistory" class="w3-bar-item w3-button w3-mobile">Booking History</a>
-        <a href="about" class="w3-bar-item w3-button w3-mobile">About</a>
-        <div class="w3-dropdown-hover w3-mobile w3-right">
-            <button class="w3-button">Welcome <%=session.getAttribute("name")%>! <i class="fa fa-caret-down"></i></button>
-            <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
-                <a href="#" class="w3-bar-item w3-button w3-mobile">Account Setting</a>
-                <a href="logout" class="w3-bar-item w3-button w3-mobile">Logout</a>
-
-            </div>
-        </div>
-    </div>
-
+    <%@ include file = "views/header.html" %>
 
     <div class="section-center">
         <div class="container">
@@ -132,5 +119,7 @@
         </div>
     </div>
 </div>
+
+<%@ include file = "views/footer.html" %>
 </body>
 </html>

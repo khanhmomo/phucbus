@@ -43,13 +43,13 @@ public class RegistrationServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
             else {
-                PreparedStatement pst = con.prepareStatement("insert into users(user_name, user_pw, user_email, user_firstname, user_lastname) values(?,?,?,?,?) ");
+                PreparedStatement pst = con.prepareStatement("insert into users(user_name, user_pw, user_email, user_firstname, user_lastname, user_admin) values(?,?,?,?,?,?) ");
                 pst.setString(1, user_name);
                 pst.setString(2, user_pass);
                 pst.setString(3, user_email);
                 pst.setString(4,user_firstname);
                 pst.setString(5,user_lastname);
-
+                pst.setBoolean(6,false);
 
                 int rowCount = pst.executeUpdate();
                 dispatcher = request.getRequestDispatcher("register.jsp");

@@ -11,4 +11,5 @@ public class ticket {
     public String ticket_to;
     public Time ticket_time;
     public Date ticket_date;
+    public String ticket_phone;
 }

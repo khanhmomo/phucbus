@@ -57,19 +57,7 @@
 
 <div id="booking" class="section">
 
-  <div class="w3-bar w3-pink w3-sans-serif">
-    <a href= "index.jsp" class="w3-bar-item w3-button w3-mobile">PhucBus</a>
-    <a href="bookinghistory" class="w3-bar-item w3-button w3-mobile">Booking History</a>
-    <a href="about" class="w3-bar-item w3-button w3-mobile">About</a>
-    <div class="w3-dropdown-hover w3-mobile w3-right">
-      <button class="w3-button">Welcome <%=session.getAttribute("name")%>! <i class="fa fa-caret-down"></i></button>
-      <div class="w3-dropdown-content w3-bar-block w3-dark-grey">
-        <a href="#" class="w3-bar-item w3-button w3-mobile">Account Setting</a>
-        <a href="logout" class="w3-bar-item w3-button w3-mobile">Logout</a>
-
-      </div>
-    </div>
-  </div>
+  <%@ include file = "views/header.html" %>
 
 
   <div class="section-center">
@@ -78,7 +66,7 @@
         <div class="booking-form">
           <div class="w3-container">
             <div id="print">
-              <h2 class="w3-text-white">CONGRATULATION! YOUR TICKET HAS BEEN BOOKED.</h2>
+              <h2 class="w3-text-white"><%=request.getAttribute("title")%></h2>
               <br>
               <h4 class="w3-text-white">Ticket ID: <%=data.ticket_id%></h4>
 
@@ -113,17 +101,23 @@
                 </tr>
               </table>
               <p class="w3-text-light-gray" style="font-style: italic;">(*)Time might be changed due to traffic condition</p>
+              <p class="w3-text-light-gray" style="font-style: italic;">Please arrive on time for boarding (usually 15 mins prior to departure)</p>
             </div>
             <button class="w3-button w3-block w3-section w3-pink w3-ripple w3-padding"
                     href="javascript:void(0);"
                     onclick="printPageArea('print')">
               Print this ticket
             </button>
+            <a href= "index.jsp">
+              <button class="w3-button w3-block w3-section w3-white w3-text-pink w3-ripple w3-padding">Back to Home</button>
+            </a>
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<%@ include file = "views/footer.html" %>
 </body>
 </html>

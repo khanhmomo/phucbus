@@ -36,7 +36,7 @@
 						<img class="login100-form-logo" src="assets/images/logo.png" >
 
 						<div class="wrap-input100 validate-input" data-validate = "Enter email">
-							<input class="input100" type="text" name="email" placeholder="Email">
+							<input class="input100" type="text" name="uemail" placeholder="Email or username">
 							<span class="focus-input100" data-placeholder="&#xf207;"></span>
 						</div>
 
