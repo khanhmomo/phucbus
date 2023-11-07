@@ -40,10 +40,21 @@ public class LoginServlet extends HttpServlet {
 
             if (check != 0) {
                 if (check == 1) {
+                    if (rs.getInt("user_admin") == 1) {
+                        session.setAttribute("admin", "admin");
+                    } else {
+                        session.setAttribute("admin", "user");
+                    }
+
                     session.setAttribute("name", rs.getString("user_name"));
                     dispatcher = request.getRequestDispatcher("index.jsp");
                 }
                 if (check == 2) {
+                    if (rs_uname.getInt("user_admin") == 1) {
+                        session.setAttribute("admin", "admin");
+                    } else {
+                        session.setAttribute("admin", "user");
+                    }
                     session.setAttribute("name", rs_uname.getString("user_name"));
                     dispatcher = request.getRequestDispatcher("index.jsp");
                 }

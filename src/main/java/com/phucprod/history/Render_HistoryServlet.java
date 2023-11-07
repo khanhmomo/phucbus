@@ -61,7 +61,7 @@ public class Render_HistoryServlet extends HttpServlet {
 
                         userTicket.ticket_time = rs_route.getTime(6);
                         userTicket.ticket_date = rs_ticket.getDate(4);
-                        userTicket.ticket_busID = rs_ticket.getInt(2);
+                        userTicket.ticket_busID = rs_ticket.getInt(5);
                         userTicket.ticket_phone = rs_ticket.getString(3);
                         ticket_list.add(userTicket);
 

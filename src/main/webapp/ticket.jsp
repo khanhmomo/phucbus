@@ -66,8 +66,8 @@
         <div class="booking-form">
           <div class="w3-container">
             <div id="print">
-              <h2 class="w3-text-white"><%=request.getAttribute("title")%></h2>
-              <br>
+              <h4 class="w3-text-white"><%=request.getAttribute("title")%></h4>
+
               <h4 class="w3-text-white">Ticket ID: <%=data.ticket_id%></h4>
 
               <img src=

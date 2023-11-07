@@ -40,7 +40,7 @@
 <body>
 <input type="hidden" id="status" value="<%= request.getAttribute("status")%>">
     <div id="booking" class="section">
-        <%@ include file = "views/header.html" %>
+        <%@ include file = "views/role_picker.jsp" %>
         <div id="booking" class="section">
         <div class="section-center">
             <div class="container">

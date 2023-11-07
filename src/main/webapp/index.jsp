@@ -2,6 +2,8 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="com.sun.org.apache.xpath.internal.operations.Equals" %>
+<%@ page import="java.util.Objects" %>
 <%
   if(session.getAttribute("name")==null) {
       response.sendRedirect("login.jsp");
@@ -40,99 +42,16 @@
 
 <div id="booking" class="section">
 
-    <%@ include file = "views/header.html" %>
+    <%
+        if(session.getAttribute("admin") == "admin"){
+    %>      <%@ include file="views/admin_header.html"%>
+            <%@ include file="views/admin_index.html"%>
+    <%}
+    else {if(session.getAttribute("admin") == "user"){%>
+        <%@ include file="views/header.html"%>
+    <%@ include file="views/index.html"%>
+    <%}} %>
 
-
-    <div class="section-center">
-        <div class="container">
-            <div class="row">
-                <div class="booking-form">
-                    <form action="search" method="post" id="search_form">
-                        <div class="form-group">
-                            <h1 style="color: white;">Booking Information</h1>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label style="color: white;">From</label>
-                                    <label>
-                                        <select name="from" class = "form-control" style="width: 500px;">
-                                            <option value="-1">Select departure</option>
-                                            <%
-                                                try{
-                                                    String Query ="select * from cities";
-                                                    Class.forName("com.mysql.cj.jdbc.Driver");
-                                                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/company","root","admin");
-                                                    Statement stm =con.createStatement();
-                                                    ResultSet rs=stm.executeQuery(Query);
-                                                    while(rs.next()) {
-                                            %>
-                                            <option value="<%=rs.getInt("city_id")%>"><%=rs.getString("city_name")%></option>
-                                            <%
-                                                    }
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                }
-                                            %>>
-                                        </select>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label style="color: white;">To</label>
-                                    <select name="to" class = "form-control" style="width: 500px;">
-                                        <option value="-1">Select destination</option>
-                                        <%
-                                            try{
-                                                String Query ="select * from cities";
-                                                Class.forName("com.mysql.cj.jdbc.Driver");
-                                                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/company","root","admin");
-                                                Statement stm =con.createStatement();
-                                                ResultSet rs=stm.executeQuery(Query);
-                                                while(rs.next()) {
-                                        %>
-                                        <option value="<%=rs.getInt("city_id")%>"><%=rs.getString("city_name")%></option>
-                                        <%
-                                                }
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        %>>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <span class="form-label">Departing</span>
-                                    <input name="date" class="form-control" type="date" required>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <span class="form-label">Seat type</span>
-                                    <select name="seat_type" class="form-control">
-                                        <option>Seating</option>
-                                        <option>Bed </option>
-                                    </select>
-                                    <span class="select-arrow"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <div class="form-btn ">
-                                <button class="submit-btn">Search</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 <%@ include file = "views/footer.html" %>
 </body>
