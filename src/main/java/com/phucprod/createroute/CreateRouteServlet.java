@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Objects;
 
 @WebServlet("/create_new_route")
 public class CreateRouteServlet extends HttpServlet {
@@ -16,14 +17,7 @@ public class CreateRouteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        out.println(request.getParameter("new_route_busID"));
-        out.println(request.getParameter("new_route_from"));
-        out.println(request.getParameter("new_route_to"));
-        out.println(request.getParameter("new_route_numseat"));
-        out.println(request.getParameter("new_route_seattype"));
-        out.println(request.getParameter("new_route_starttime"));
-        out.println(request.getParameter("new_route_endtime"));
-        out.println(request.getParameter("new_route_price"));
+        HttpSession session = request.getSession();
 
         String new_route_busID = request.getParameter("new_route_busID");
         String new_route_from = request.getParameter("new_route_from");
@@ -37,19 +31,31 @@ public class CreateRouteServlet extends HttpServlet {
         RequestDispatcher dispatcher = null;
         Connection con = null;
 
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/company","root","admin");
 
             PreparedStatement pst = con.prepareStatement("insert into route(bus_id, seat_type, start_station, end_station, number_of_seat, start_time, arrive_time, price) values(?,?,?,?,?,?,?,?)");
             pst.setString(1, new_route_busID);
-            pst.setString(2, new_route_seattype);
+            if (Objects.equals(new_route_seattype, "1")) pst.setString(2, "seating"); else pst.setString(2, "bed");
             pst.setString(3, new_route_from);
             pst.setString(4, new_route_to);
             pst.setString(5, new_route_numseat);
             pst.setString(6, new_route_starttime);
             pst.setString(7, new_route_endtime);
             pst.setString(8, new_route_price);
+
+            int rowCount = pst.executeUpdate();
+            dispatcher = request.getRequestDispatcher("index.jsp");
+            if (rowCount > 0) {
+                request.setAttribute("status_add_route", "success");
+            } else {
+                request.setAttribute("status_add_route", "failed");
+            }
+            session.setAttribute("admin", "admin");
+            dispatcher.forward(request, response);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
