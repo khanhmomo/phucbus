@@ -14,7 +14,7 @@
 
                             <div id="fname" class="w3-container w3-white w3-border city">
                                 <div class="w3-padding-16">
-                                    <form class="w3-container w3-card-4" method="post" action="usersetting">
+                                    <form class="w3-container w3-card-4" method="post" action="create_new_route">
                                         <h2> Create new transit route</h2>
                                         <p>
                                             <label class="w3-text-pink"><b>Bus ID number</b></label>
@@ -23,9 +23,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="w3-text-pink"><b>From</b></label>
-
-                                                        <select name="from" class="w3-select w3-input w3-border">
-                                                            <option value="-1" >Select departure</option>
+                                                        <select name="new_route_from" class="w3-select w3-input w3-border">
+                                                            <option value="-1" >Select depnarture</option>
                                                             <%
                                                             try{
                                                             String Query ="select * from cities";
@@ -49,7 +48,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="w3-text-pink"><b>To</b></label>
-                                                    <select name="to" class="w3-select w3-input w3-border">
+                                                    <select name="new_route_to" class="w3-select w3-input w3-border">
                                                         <option value="-1" class="w3-text-pink">Select destination</option>
                                                         <%
                                                         try{
@@ -77,13 +76,13 @@
                                                 <div class="form-group">
                                                     <p>
                                                         <label class="w3-text-pink"><b>Number of seat</b></label>
-                                                        <input class="w3-input w3-border" name="new_route_busID" type="text"></p>
+                                                        <input class="w3-input w3-border" name="new_route_numseat" type="text"></p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="w3-text-pink"><b>Seat type</b></label>
                                                 <div class="form-group ">
-                                                    <select class="w3-select w3-input w3-border" name="option">
+                                                    <select class="w3-select w3-input w3-border" name="new_route_seattype">
                                                         <option value="" disabled selected>Choose your option</option>
                                                         <option value="1">Seating</option>
                                                         <option value="2">Bed</option>
@@ -97,21 +96,21 @@
                                                 <div class="form-group">
                                                     <p>
                                                         <label class="w3-text-pink"><b>Start time</b></label>
-                                                        <input class="w3-input w3-border" name="new_route_busID" type="time"></p>
+                                                        <input class="w3-input w3-border" name="new_route_starttime" type="time"></p>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <p>
                                                         <label class="w3-text-pink"><b>End time</b></label>
-                                                        <input class="w3-input w3-border" name="new_route_busID" type="time"></p>
+                                                        <input class="w3-input w3-border" name="new_route_endtime" type="time"></p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <p>
                                                         <label class="w3-text-pink"><b>Price</b></label>
-                                                        <input class="w3-input w3-border" name="new_route_busID" type="text"></p>
+                                                        <input class="w3-input w3-border" name="new_route_price" type="text"></p>
                                                 </div>
                                             </div>
                                         </div>
