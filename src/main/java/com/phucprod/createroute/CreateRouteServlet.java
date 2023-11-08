@@ -50,6 +50,7 @@ public class CreateRouteServlet extends HttpServlet {
             pst.setString(6, new_route_starttime);
             pst.setString(7, new_route_endtime);
             pst.setString(8, new_route_price);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
