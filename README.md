@@ -1,5 +1,5 @@
 # PHUCBUS 2023
-> A Java Servlet Web project
+> A bus ticket booking website using `Java Servlet` and `MySQL`
 
 ## Environment setup
 
