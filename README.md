@@ -4,10 +4,8 @@
 ## Environment setup
 
 - Prefer IDE: [IntelLIJ IDEA](https://www.jetbrains.com/idea/)
-
-#Install Apache Tomcat (Any version)
-
-#Install JDK 21
+- Server: [Apache Tomcat 9.0.82](https://tomcat.apache.org/download-90.cgi)
+- Java Development Kit: [JDK 21](https://www.oracle.com/java/technologies/downloads/)
 
 #Install MySQL Community (Any version)
 
