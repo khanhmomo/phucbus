@@ -14,6 +14,6 @@
 4. Copy mysql-connector-8.0.11.jar to `<apachetomcat_folder>/lib`
    
 ### Create IntelLij Servlet Template
-- [Tutorial](https://www.jetbrains.com/help/idea/creating-and-configuring-web-application-elements.html)
+- [Servlet Template Tutorial](https://www.jetbrains.com/help/idea/creating-and-configuring-web-application-elements.html)
 
 !Remember to change the port and mysql account when using mysql command in java source code!
