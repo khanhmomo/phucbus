@@ -6,10 +6,8 @@
 - Prefer IDE: [IntelLIJ IDEA](https://www.jetbrains.com/idea/)
 - Server: [Apache Tomcat 9.0.82](https://tomcat.apache.org/download-90.cgi)
 - Java Development Kit: [JDK 21](https://www.oracle.com/java/technologies/downloads/)
-
-#Install MySQL Community (Any version)
-
-#INSTALL MYSQL CONNECTOR
+- Database: [MySQL](https://dev.mysql.com/downloads/mysql/)
+### INSTALL MYSQL CONNECTOR
 1. Download mysql-connector-8.0.11.jar
 2. Create <lib> folder in main/webapp
 3. Copy mysql-connector-8.0.11.jar to /lib
