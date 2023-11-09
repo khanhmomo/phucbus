@@ -15,16 +15,6 @@ public class CreateRouteServlet extends HttpServlet {
     private  static final long serialVersionUID = 1L;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println(request.getParameter("new_route_busID"));
-        out.println(request.getParameter("new_route_from"));
-        out.println(request.getParameter("new_route_to"));
-        out.println(request.getParameter("new_route_numseat"));
-        out.println(request.getParameter("new_route_seattype"));
-        out.println(request.getParameter("new_route_starttime"));
-        out.println(request.getParameter("new_route_endtime"));
-        out.println(request.getParameter("new_route_price"));
-
         String new_route_busID = request.getParameter("new_route_busID");
         String new_route_from = request.getParameter("new_route_from");
         String new_route_to = request.getParameter("new_route_to");
@@ -50,6 +40,15 @@ public class CreateRouteServlet extends HttpServlet {
             pst.setString(6, new_route_starttime);
             pst.setString(7, new_route_endtime);
             pst.setString(8, new_route_price);
+
+            int rowCount = pst.executeUpdate();
+            dispatcher = request.getRequestDispatcher("index.jsp");
+            if (rowCount > 0) {
+                request.setAttribute("status", "route_success");
+            } else {
+                request.setAttribute("status", "route_failed");
+            }
+            dispatcher.forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -18,6 +18,7 @@ public class RegistrationServlet extends HttpServlet {
         String user_repass = request.getParameter("repass");
         String user_firstname = request.getParameter("firstname");
         String user_lastname = request.getParameter("lastname");
+        String user_admin = request.getParameter("admin");
 
         RequestDispatcher dispatcher = null;
         Connection con = null;
@@ -33,14 +34,30 @@ public class RegistrationServlet extends HttpServlet {
             ResultSet rs_email = pst_emailcheck.executeQuery();
             ResultSet rs_name = pst_namecheck.executeQuery();
             if (rs_email.next() || rs_name.next()) {
-                dispatcher = request.getRequestDispatcher("register.jsp");
+
+                if (Objects.equals(user_admin, "true")) {
+                    dispatcher = request.getRequestDispatcher("index.jsp");
+                    request.setAttribute("status", "already");
+                    dispatcher.forward(request, response);
+                } else if(Objects.equals(user_admin, "false")){
+                    dispatcher = request.getRequestDispatcher("register.jsp");
+                    request.setAttribute("status", "already");
+                    dispatcher.forward(request, response);
+                }
+
                 request.setAttribute("status", "already");
                 dispatcher.forward(request, response);
             }
             else if (!Objects.equals(user_pass, user_repass)) {
-                dispatcher = request.getRequestDispatcher("register.jsp");
-                request.setAttribute("status", "pw_noteql");
-                dispatcher.forward(request, response);
+                if (Objects.equals(user_admin, "true")) {
+                    dispatcher = request.getRequestDispatcher("index.jsp");
+                    request.setAttribute("status", "pw_noteql");
+                    dispatcher.forward(request, response);
+                } else if(Objects.equals(user_admin, "false")){
+                    dispatcher = request.getRequestDispatcher("register.jsp");
+                    request.setAttribute("status", "pw_noteql");
+                    dispatcher.forward(request, response);
+                }
             }
             else {
                 PreparedStatement pst = con.prepareStatement("insert into users(user_name, user_pw, user_email, user_firstname, user_lastname, user_admin) values(?,?,?,?,?,?) ");
@@ -49,10 +66,15 @@ public class RegistrationServlet extends HttpServlet {
                 pst.setString(3, user_email);
                 pst.setString(4,user_firstname);
                 pst.setString(5,user_lastname);
-                pst.setBoolean(6,false);
-
+                if (Objects.equals(user_admin, "true")) {
+                    pst.setBoolean(6,true);
+                    dispatcher = request.getRequestDispatcher("index.jsp");
+                } else if(Objects.equals(user_admin, "false")){
+                    dispatcher = request.getRequestDispatcher("register.jsp");
+                    pst.setBoolean(6,false);
+                }
                 int rowCount = pst.executeUpdate();
-                dispatcher = request.getRequestDispatcher("register.jsp");
+
                 if (rowCount > 0) {
                     request.setAttribute("status", "success");
                 } else {

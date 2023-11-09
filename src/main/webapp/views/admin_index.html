@@ -1,4 +1,4 @@
-<input type="hidden" id="status" value="<%= request.getAttribute("status_add_route")%>">
+<input type="hidden" id="status" value="<%= request.getAttribute("status")%>">
 <div id="booking" class="section">
     <div class="section-center">
         <div class="container">
@@ -123,21 +123,21 @@
 
                             <div id="email" class="w3-container w3-white w3-border city" style="display:none">
                                 <div class="w3-padding-16">
-                                    <form class="w3-container w3-card-4" method="post" action="usersetting">
+                                    <form class="w3-container w3-card-4"  method="post" action="create_new_date_route">
                                         <h2> Add a route to specific date</h2>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <p>
                                                         <label class="w3-text-pink"><b>Date</b></label>
-                                                        <input class="w3-input w3-border" name="new_route_busID" type="date" required></p>
+                                                        <input class="w3-input w3-border" name="new_date_route_dateID" type="date" required></p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <p>
                                                         <label class="w3-text-pink"><b>Bus ID</b></label>
-                                                        <input class="w3-input w3-border" name="new_route_busID" type="text" required></p>
+                                                        <input class="w3-input w3-border" name="new_date_route_busID" type="text" required></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -147,25 +147,39 @@
                             </div>
                             <div id="pass" class="w3-container w3-white w3-border city" style="display:none">
                                 <div class="w3-padding-16">
-                                    <form class="w3-container w3-card-4" method="post" action="usersetting">
+                                    <form class="w3-container w3-card-4" method="post" action="register">
                                         <h2>Create new ADMIN account</h2>
                                         <p>
                                             <label class="w3-text-pink"><b>Username</b></label>
-                                            <input class="w3-input w3-border" name="old_pass" type="type" required></p>
+                                            <input class="w3-input w3-border" name="username" type="text" required></p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <p>
+                                                        <label class="w3-text-pink"><b>First name</b></label>
+                                                        <input class="w3-input w3-border" name="firstname" type="text" required></p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <p>
+                                                        <label class="w3-text-pink"><b>Last name</b></label>
+                                                        <input class="w3-input w3-border" name="lastname" type="text" required></p>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <p>
-                                            <label class="w3-text-pink"><b>First name</b></label>
-                                            <input class="w3-input w3-border" name="old_pass" type="type" required></p>
-                                        <p>
-                                            <label class="w3-text-pink"><b>Last name</b></label>
-                                            <input class="w3-input w3-border" name="old_pass" type="type" required></p>
+                                            <label class="w3-text-pink"><b>Email</b></label>
+                                            <input class="w3-input w3-border" name="email" type="text" required></p>
                                         <p>
                                             <label class="w3-text-pink"><b>New password</b></label>
-                                            <input class="w3-input w3-border" name="new_pass" type="password" required></p>
+                                            <input class="w3-input w3-border" name="pass" type="password" required></p>
                                         <p>
                                             <label class="w3-text-pink"><b>Repeat new password</b></label>
-                                            <input class="w3-input w3-border" name="new_repass" type="password" required></p>
+                                            <input class="w3-input w3-border" name="repass" type="password" required></p>
+
+                                        <input name="admin" type="hidden" value="true">
                                         <p>
-                                            <input name="section" type="hidden" value="password" required></p>
                                         <button class="w3-btn w3-pink w3-round-xxlarge">Create</button></p>
                                     </form>
                                 </div>
@@ -197,10 +211,39 @@
 <link rel="stylesheet" href="alert/dist/sweetalert.css">
 <script type="text/javascript">
     var status = document.getElementById("status").value;
-    if (status == "success") {
-        swal("New route added to database","Route created!","success");
+    //SUCCESS
+    if (status == "route_success") {
+        swal("Database update succesful","Route created!","success");
     }
-    if (status == "failed") {
+    if (status == "date_success") {
+        swal("Database succesful","Route added!","success");
+    }
+    if (status =="success") {
+
+    }
+    //ERROR
+    if (status == "route_failed") {
         swal("Error","Route not created!","error");
     }
+    if (status == "date_failed") {
+        swal("Error","Route not added!","error");
+    }
+    if (status == "date_notfound") {
+        swal("Error","Bus ID not found!","error");
+    }
+    if (status == "date_already") {
+        swal("Error","Already running that day!","error");
+    }
+
+    //ADMIN
+    if (status == "success") {
+        swal("Welcome to PhucBus","Account created!","success");
+    }
+    if (status == "already") {
+        swal("Username or Email exists!","Registration failed!","error");
+    }
+    if (status == "pw_noteql") {
+        swal("Password error","Passwords not match! ","error");
+    }
+
 </script>

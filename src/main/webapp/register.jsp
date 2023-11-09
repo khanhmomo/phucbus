@@ -64,6 +64,7 @@
                         <input class="input100" type="password" name="repass" placeholder="Re-Password">
                         <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
+                    <input type="hidden" name="admin" value="false">
 
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn">
