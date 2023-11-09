@@ -3,7 +3,7 @@
 
 ## Environment setup
 
-#Prefer IDE: Inte
+- Prefer IDE: [IntelLIJ IDEA](https://www.jetbrains.com/idea/)
 
 #Install Apache Tomcat (Any version)
 
