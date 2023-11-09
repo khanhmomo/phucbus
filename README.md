@@ -1,4 +1,4 @@
-# PHUCBUS 2023
+# PHUCBUS @2023
 > A bus ticket booking website using `Java Servlet` and `MySQL`
 
 ## Environment setup
