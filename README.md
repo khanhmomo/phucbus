@@ -10,10 +10,13 @@
 ### INSTALL MYSQL CONNECTOR
 1. Download [mysql-connector-8.0.11.jar](https://jar-download.com/artifacts/mysql/mysql-connector-java/8.0.11/source-code)
 2. Create <lib> folder in main/webapp
-   .
-    └── main                    
-        └──  webapp
-              └──  lib
+    .
+    ├── ...
+    ├── test                    # Test files (alternatively `spec` or `tests`)
+    │   ├── benchmarks          # Load and stress tests
+    │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
+    │   └── unit                # Unit tests
+    └── ...
              
  
 4. Copy mysql-connector-8.0.11.jar to /lib
