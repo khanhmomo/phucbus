@@ -1,4 +1,7 @@
 # PHUCBUS 2023
+> A Java Servlet Web project
+
+## Environment setup
 
 #Prefer IDE: Inte
 
