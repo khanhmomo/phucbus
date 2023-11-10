@@ -50,6 +50,7 @@ public class AdminTicketServlet extends HttpServlet {
                 }
 
             }
+            request.setAttribute("selectedTab", "2");
             request.setAttribute("ticket_data", ticket_list);
             dispatcher = request.getRequestDispatcher("viewdata.jsp");
             dispatcher.forward(request,response);

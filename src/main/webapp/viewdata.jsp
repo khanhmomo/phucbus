@@ -6,6 +6,7 @@
 <%@ page import="java.util.Objects" %>
 <%@ page import="struct.ticket_custom" %>
 <%@ page import="java.util.List" %>
+<%@ page import="struct.route" %>
 <%
   if(session.getAttribute("name") == null) {
     response.sendRedirect("login.jsp");
@@ -42,19 +43,19 @@
 
 </head>
 <body>
-
+<input type="hidden" id="selectedTabInput" value=<%=request.getAttribute("selectedTab")%>>
 <%@ include file="views/admin_header.html"%>
 <br><br>
 
 
   <div class="w3-container">
     <div class="w3-bar w3-pink">
-      <button class="w3-bar-item w3-button tablink w3-white" onclick="openCity(event,'fname')">View TICKET list</button>
-      <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'email')">View active ROUTE</button>
-      <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'pass')">View ROUTE by DATE</button>
+      <button class="w3-bar-item w3-button tablink w3-white" onclick="openCity(event,'1')">View TICKET list</button>
+      <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'2')">View active ROUTE</button>
+      <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'3')">View ROUTE by DATE</button>
     </div>
 
-    <div id="fname" class="w3-container w3-white w3-border city">
+    <div id="1" class="w3-container w3-white w3-border city">
       <div class="w3-padding-16">
         <form class="w3-container w3-card-4" method="post" action="admin_view_ticket">
           <h2> Query ticket list by DATE and BUS ID</h2>
@@ -99,16 +100,16 @@
       </div>
     </div>
 
-    <div id="email" class="w3-container w3-white w3-border city" style="display:none">
+    <div id="2" class="w3-container w3-white w3-border city" style="display:none">
       <div class="w3-padding-16">
-        <form class="w3-container w3-card-4" method="post" action="usersetting">
+        <form class="w3-container w3-card-4" method="post" action="admin_view_route">
           <h2> Query ROUTE</h2>
           <div class="row">
 
             <div class="col-md-6">
               <div class="form-group">
                 <label class="w3-text-pink"><b>From</b></label>
-                <select name="new_route_from" class="w3-select w3-input w3-border">
+                <select name="view_route_from" class="w3-select w3-input w3-border">
                   <option value="-1" >Select depnarture</option>
                   <%
                     try{
@@ -133,7 +134,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label class="w3-text-pink"><b>To</b></label>
-                <select name="new_route_to" class="w3-select w3-input w3-border " required>
+                <select name="view_route_to" class="w3-select w3-input w3-border " required>
                   <option value="-1" class="w3-text-pink">Select destination</option>
                   <%
                     try{
@@ -159,24 +160,46 @@
 
           <p><button class="w3-btn w3-pink w3-round-xxlarge">Search</button></p>
         </form>
+        <table class="w3-table w3-bordered">
+          <tr class = "w3-pink">
+            <th>Bus ID</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Seat type</th>
+            <th>Price</th>
+          </tr>
+          <% List<route> list_route = (List<route>) request.getAttribute("route_data");
+            if(list_route != null) {
+              for(route item : list_route) {
+          %>
+          <tr>
+            <td><%=item.bus_id%></td>
+            <td><%=item.start_time%></td>
+            <td><%=item.arrive_time%></td>
+            <td><%=item.seat_type%></td>
+            <td><%=item.price%></td>
+          </tr>
+          <%
+              }}%>
+        </table>
       </div>
     </div>
-    <div id="pass" class="w3-container w3-white w3-border city" style="display:none">
+    <div id="3" class="w3-container w3-white w3-border city" style="display:none">
       <div class="w3-padding-16">
-        <form class="w3-container w3-card-4" method="post" action="usersetting">
+        <form class="w3-container w3-card-4" method="post" action="admin_view_dateroute">
           <h2>Query ROUTE by Date</h2>
           <div class="row">
             <div class="col-md-4">
               <div class="form-group">
                 <p>
                   <label class="w3-text-pink"><b>Date</b></label>
-                  <input class="w3-input w3-border" name="new_route_busID" type="date"></p>
+                  <input class="w3-input w3-border" name="view_dateroute_dateID" type="date"></p>
               </div>
             </div>
             <div class="col-md-4">
               <div class="form-group">
                 <label class="w3-text-pink"><b>From</b></label>
-                <select name="new_route_from" class="w3-select w3-input w3-border">
+                <select name="view_dateroute_from" class="w3-select w3-input w3-border">
                   <option value="-1" >Select depnarture</option>
                   <%
                     try{
@@ -201,7 +224,7 @@
             <div class="col-md-4">
               <div class="form-group">
                 <label class="w3-text-pink"><b>To</b></label>
-                <select name="new_route_to" class="w3-select w3-input w3-border " required>
+                <select name="view_dateroute_to" class="w3-select w3-input w3-border " required>
                   <option value="-1" class="w3-text-pink">Select destination</option>
                   <%
                     try{
@@ -225,6 +248,27 @@
           </div>
           <button class="w3-btn w3-pink w3-round-xxlarge">Search</button></p>
         </form>
+        
+        <table class="w3-table w3-bordered">
+          <tr class = "w3-pink">
+            <th>Bus ID</th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Taken Seat</th>
+          </tr>
+          <% List<route> list_route_date = (List<route>) request.getAttribute("dateroute_data");
+            if(list_route_date != null) {
+              for(route item : list_route_date) {
+          %>
+          <tr>
+            <td><%=item.bus_id%></td>
+            <td><%=item.start_time%></td>
+            <td><%=item.arrive_time%></td>
+            <td><%=item.number_of_seat%></td>
+          </tr>
+          <%
+              }}%>
+        </table>
       </div>
     </div>
 
@@ -232,6 +276,8 @@
       function openCity(evt, cityName) {
         var i, x, tablinks;
         x = document.getElementsByClassName("city");
+        var param = document.getElementById("selectedTabInput").value;
+
         for (i = 0; i < x.length; i++) {
           x[i].style.display = "none";
         }
@@ -241,6 +287,10 @@
         }
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " w3-white";
+
+
+
+
       }
     </script>
   </div>
