@@ -34,6 +34,7 @@ public class AdminDateRouteServlet extends HttpServlet {
             ResultSet rs = pst_ticket.executeQuery();
             List<route> list = new ArrayList<route>();
 
+
             if(rs.first()) {
                 while(!rs.isAfterLast()) {
                     route item = new route();
