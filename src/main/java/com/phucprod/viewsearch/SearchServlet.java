@@ -19,6 +19,7 @@ import java.util.List;
 public class SearchServlet extends HttpServlet {
     private  static final long serialVersionUID = 1L;
     @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int search_from = Integer.parseInt(request.getParameter("from"));
         int search_to = Integer.parseInt(request.getParameter("to"));
