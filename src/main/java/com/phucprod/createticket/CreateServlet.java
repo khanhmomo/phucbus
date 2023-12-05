@@ -72,6 +72,7 @@ public class CreateServlet extends HttpServlet {
                             pst.setString(4, ticket_date);
                             pst.setString(5, ticket_busID);
 
+
                             pst.executeUpdate();
 
                             PreparedStatement pst_from = con.prepareStatement("select * from cities where city_id = ?");
@@ -103,12 +104,6 @@ public class CreateServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
