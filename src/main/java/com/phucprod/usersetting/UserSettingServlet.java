@@ -1,5 +1,7 @@
 package com.phucprod.usersetting;
 
+import com.phucprod.database_update.UserSetting;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -21,19 +23,14 @@ public class UserSettingServlet extends HttpServlet {
         HttpSession session = request.getSession();
         RequestDispatcher dispatcher = null;
 
+        UserSetting update = new UserSetting();
+
         if (Objects.equals(method, "fullname")) {
             String new_first = request.getParameter("new_first");
             String new_last = request.getParameter("new_last");
 
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "admin");
-                String query = "update users set user_firstname=?, user_lastname=? where user_name=?;";
-                PreparedStatement pst = con.prepareStatement(query);
-                pst.setString(1,new_first);
-                pst.setString(2,new_last);
-                pst.setString(3, (String) session.getAttribute("name"));
-                pst.executeUpdate();
+                update.updateFullName(new_first, new_last, session);
                 request.setAttribute("status", "success");
                 dispatcher = request.getRequestDispatcher("usersetting.jsp");
                 dispatcher.forward(request,response);
@@ -44,13 +41,7 @@ public class UserSettingServlet extends HttpServlet {
         } else if (Objects.equals(method, "email")) {
             String new_email = request.getParameter("new_email");
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "admin");
-                String query = "update users set user_email=? where user_name=?;";
-                PreparedStatement pst = con.prepareStatement(query);
-                pst.setString(1,new_email);
-                pst.setString(2, (String) session.getAttribute("name"));
-                pst.executeUpdate();
+                update.updateEmail(new_email, session);
                 dispatcher = request.getRequestDispatcher("usersetting.jsp");
                 request.setAttribute("status", "success");
                 dispatcher.forward(request,response);
@@ -71,13 +62,7 @@ public class UserSettingServlet extends HttpServlet {
                 request.setAttribute("status", "samepass");
             }else {
                 try {
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "admin");
-                    String query = "update users set user_pw=? where user_name=?;";
-                    PreparedStatement pst = con.prepareStatement(query);
-                    pst.setString(1,new_pass);
-                    pst.setString(2, (String) session.getAttribute("name"));
-                    pst.executeUpdate();
+                    update.updatePassword(new_pass, session);
                     dispatcher = request.getRequestDispatcher("usersetting.jsp");
                     request.setAttribute("status", "success");
                 } catch (Exception e) {
