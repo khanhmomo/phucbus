@@ -21,15 +21,14 @@ public class SearchLoader {
             if (rs.first()){
                 List<route> list_route = new ArrayList<route>();
                 while (!rs.isAfterLast()) {
+
                     PreparedStatement pst_from = con.prepareStatement("select * from cities where city_id = ?");
                     PreparedStatement pst_to = con.prepareStatement("select * from cities where city_id = ?");
                     PreparedStatement pst_route = con.prepareStatement("select * from route where bus_id = ? and seat_type = ?");
                     pst_from.setInt(1, se_from);
                     pst_to.setInt(1, se_to);
                     pst_route.setInt(1, rs.getInt(4));
-                    pst_route.setString(2, type.toLowerCase());
-
-
+                    pst_route.setString(2, type);
                     ResultSet rs_from = pst_from.executeQuery();
                     ResultSet rs_to = pst_to.executeQuery();
                     ResultSet rs_route = pst_route.executeQuery();

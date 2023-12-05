@@ -23,15 +23,19 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int search_from = Integer.parseInt(request.getParameter("from"));
         int search_to = Integer.parseInt(request.getParameter("to"));
-        String search_date = request.getParameter("date");
-        String search_seattype = request.getParameter("seat_type");
 
+        String search_date = request.getParameter("date");
+        String search_seattype = request.getParameter("seat_type").toLowerCase();
+        PrintWriter out = response.getWriter();
         RequestDispatcher dispatcher = null;
 
         try{
             SearchLoader loadSearch = new SearchLoader();
             List<route> list_route = loadSearch.ListRoute(search_from, search_to, search_date, search_seattype);
 
+            for (route item : list_route) {
+                out.println(item.bus_id);
+            }
             if (list_route != null) {
                 request.setAttribute("data", list_route);
                 request.setAttribute("date", search_date);
@@ -41,8 +45,12 @@ public class SearchServlet extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("index.jsp");
             }
             dispatcher.forward(request,response);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 }

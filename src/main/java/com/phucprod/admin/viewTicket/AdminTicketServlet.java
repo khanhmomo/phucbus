@@ -1,5 +1,6 @@
 package com.phucprod.admin.viewTicket;
 
+import com.phucprod.database_query.AdminTicketLoader;
 import struct.ticket;
 import struct.ticket_custom;
 
@@ -25,31 +26,8 @@ public class AdminTicketServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/company","root","admin");
-
-            PreparedStatement pst_ticket = con.prepareStatement("select * from tickets where bus_id = ? and date_id = ?");
-            pst_ticket.setString(1, view_ticket_busID);
-            pst_ticket.setString(2, view_ticket_dateID);
-
-            ResultSet rs = pst_ticket.executeQuery();
-            List<ticket_custom> ticket_list = new ArrayList<ticket_custom>();
-            if (rs.first()) {
-                while (!rs.isAfterLast()) {
-                    ticket_custom item = new ticket_custom();
-                    item.ticketID = rs.getString(1);
-                    PreparedStatement pst_user = con.prepareStatement("select * from users where id = ?");
-                    pst_user.setInt(1, rs.getInt(2));
-                    ResultSet rs_user = pst_user.executeQuery();
-                    if (rs_user.next()) {
-                        item.firstname = rs_user.getString(5);
-                        item.lastname = rs_user.getString(6);
-                    }
-                    ticket_list.add(item);
-                    rs.relative(1);
-                }
-
-            }
+            AdminTicketLoader exec = new AdminTicketLoader();
+            List<ticket_custom> ticket_list = exec.AdminTicketLoaderSQL(view_ticket_dateID,view_ticket_busID);
             request.setAttribute("selectedTab", "2");
             request.setAttribute("ticket_data", ticket_list);
             dispatcher = request.getRequestDispatcher("viewdata.jsp");

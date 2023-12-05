@@ -13,4 +13,5 @@ public class route {
     public Time arrive_time;
     public Integer price;
 
+    public String date;
 }
