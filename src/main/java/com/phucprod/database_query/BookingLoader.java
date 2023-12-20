@@ -1,4 +1,4 @@
-package com.phucprod.database;
+package com.phucprod.database_query;
 
 import struct.route;
 import struct.user_info;
@@ -30,15 +30,6 @@ public class BookingLoader {
                 ResultSet rs_to = pst_to.executeQuery();
                 ResultSet rs_user = pst_user.executeQuery();
                 if (rs_from.next() && rs_to.next() && rs_user.next()) {
-                    item = new route();
-                    item.bus_id = rs.getInt(1);
-                    item.price = rs.getInt(8);
-                    item.start_station = rs_from.getString(2);
-                    item.end_station = rs_to.getString(2);
-                    item.seat_type = rs.getString(2);
-                    item.start_time = rs.getTime(6);
-                    item.arrive_time = rs.getTime(7);
-
                     item = new route();
                     item.bus_id = rs.getInt(1);
                     item.price = rs.getInt(8);
